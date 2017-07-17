@@ -7,7 +7,19 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {
+  MKColor,
+  MKSlider,
+  MKRangeSlider,
+  setTheme,
+  MKButton,
+} from 'react-native-material-kit';
+
 import { SetResult as setRightAction } from '../redux/modules/ImgResult';
+
+const ColoredRaisedButton = MKButton.coloredButton()
+  .withText('Submit')
+  .build();
 const styles = StyleSheet.create({
   confirm: {   
 		width: 100,
@@ -40,19 +52,8 @@ class SubmitButton extends Component{
 	render(){
 		const { setRight } = this.props;
 		return (
-		<TouchableHighlight
-			style={this.state.isSubmit ? styles.confirm : styles.confirm1}
-			onPress={
-					()=>{
-						this.setState({isSubmit:true});
-						setRight(0);
-						
-					}
-			}
-			onPressOut={()=>(this.setState({isSubmit:false}))}
-			>
-			<Text style={{ color: '#fff', fontSize: 18 }}>submit</Text>	
-		</TouchableHighlight>)
+		<ColoredRaisedButton style={styles.confirm1} />
+		)
 	}
 }
 export default connect(null,

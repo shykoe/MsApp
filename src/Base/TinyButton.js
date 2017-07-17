@@ -124,7 +124,7 @@ class TinyButton extends Component{
         {this.state.submitButtonPressed &&<ValueText ref="valueText"  initial="0" style={{margin: 0}} />}
         </View>
         <ColoredRaisedButton 
-        style={{width: 100,height: 40,margin:4,justifyContent: 'center',alignItems: 'center'}}
+        style={{width: 100,height: 40,margin:4,justifyContent: 'center',alignItems: 'center',borderRadius: 10}}
         backgroundColor={this.state.submitButtonPressed ? MKColor.Amber : MKColor.Silver }
         onPress={()=>(this.setState( (preState)=>( { submitButtonPressed: !preState.submitButtonPressed } )))}
         >
