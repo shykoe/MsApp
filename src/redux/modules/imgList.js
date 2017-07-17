@@ -1,5 +1,5 @@
 export const SETIMGLIST = 'SETIMGLIST'; 
-export default (state = {}, action = {})=>{
+export default (state = [], action = {})=>{
 	switch(action.type){
 		case SETIMGLIST:
 			return action.payload;

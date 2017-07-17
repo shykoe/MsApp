@@ -3,6 +3,7 @@ import createSagaMiddleware, { END } from 'redux-saga';
 import { AsyncStorage } from 'react-native';
 import reducers from './reducers';
 import sagas from './sagas';
+import { createLogger } from 'redux-logger';
 const __DEVELOPMENT__ = true;
 const __CLIENT__ = true;
 
@@ -16,7 +17,7 @@ export default function create(data) {
     sagaMiddleware,
   ];
 
-  enhancers.push(applyMiddleware(...middleware));
+  enhancers.push(applyMiddleware(...middleware, createLogger()));
   if (__DEVELOPMENT__) {
     enhancers.push(
       __CLIENT__ &&

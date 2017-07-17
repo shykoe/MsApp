@@ -18,7 +18,7 @@ const sagas = function* (){
 			if(!rel.stopped){
 				yield put(nextImage(4));
 				yield put(UnSetResult());
-				// yield put(resetTimer(10000));
+				yield put(resetTimer(10000));
 				break;
 			}
 		}

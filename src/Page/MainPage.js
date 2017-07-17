@@ -75,44 +75,24 @@ class MainPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-	  	isLoading: true
 		}
 
 	}
-	componentDidMount(){
-		fetch('http://172.18.32.202:8000/imgelist')
-		.then((response)=>response.json()).then((responseJson)=>{
-			this.setState({isLoading:false, imageList:responseJson,ind:0})
-		})
-	}
 	render() {
-		const ButtonList = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
-		const { ind, setRight } = this.props;
-		if(!this.state.isLoading){
+		const ButtonList = ['Mouth', 'Hair', 'Sail', 'Metal', 'Feather', 'Wool']
+		const { ind, setRight, imageList } = this.props;
+		console.log(imageList);
+		if( imageList.length > 0 ){
 			return (
 				<View style={{ flex: 1 }}>
 					<Timer sec={30} />
 					<View style={{justifyContent: 'center', alignItems: 'center', flex: 2 }}>
-						<View style={{justifyContent: 'center', alignItems: 'center', flex: 3,flexDirection:'row',  flexWrap: 'wrap' }}>
+						<View style={{justifyContent: 'center', alignItems: 'center', flex: 3,flexDirection:'column' }}>
+							<Text style={{textAlign : 'right', fontSize :15, fontWeight :'bold'}}>类别</Text>
 							<ImageFiled 
-							imgURL={`http://172.18.32.202:8000/image/${this.state.imageList[ind]}`}
+							imgURL={`http://172.18.32.202:8000/image/${imageList[ind]}`}
 							id={0} 
-							size={{width:150,height:150}}
-							/>
-							<ImageFiled 
-							imgURL={`http://172.18.32.202:8000/image/${this.state.imageList[ind+1]}`}
-							id={1} 
-							size={{width:150,height:150}}
-							/>
-							<ImageFiled 
-							imgURL={`http://172.18.32.202:8000/image/${this.state.imageList[ind+2]}`}
-							id={2} 
-							size={{width:150,height:150}}
-							/>
-							<ImageFiled 
-							imgURL={`http://172.18.32.202:8000/image/${this.state.imageList[ind+4]}`}
-							id={3} 
-							size={{width:150,height:150}}
+							size={{width:250,height:300}}
 							/>
 
 						</View>
@@ -140,6 +120,7 @@ class MainPage extends Component {
 export default  connect(
 	(state,props) => ({
     ind: state.ind.ind,
-    PressId: state.PicAction
+    PressId: state.PicAction,
+    imageList:state.imgList
   }),{setRight:setRightAction}
 	)(MainPage)

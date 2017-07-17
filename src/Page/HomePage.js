@@ -8,13 +8,11 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 import { MKButton } from 'react-native-material-kit';
+import { GameStart as GameStartAction } from '../redux/modules/Actions';
 const ColoredRaisedButton = MKButton.coloredButton()
   .withText('Start')
-  .withOnPress(() => (
-    Actions.MainPage()
-  )
-  )
   .build();
 
 const styles = StyleSheet.create({
@@ -65,8 +63,9 @@ const styles = StyleSheet.create({
     marginBottom: 8
   }
 });
-export default class HomePage extends Component {
+class HomePage extends Component {
   render() {
+    const { gameStart } = this.props;
     return (
     	<View style={{ flex: 1 }}>
 	      <View style={{ justifyContent: 'center', alignItems: 'center',
@@ -76,8 +75,9 @@ export default class HomePage extends Component {
 	      </View>
 	      
 
-        <ColoredRaisedButton/>
+        <ColoredRaisedButton onPress={()=>{ Actions.MainPage(); gameStart();}} />
 		</View>
     )
   }
 }
+export default connect(null,{gameStart:GameStartAction})(HomePage);
