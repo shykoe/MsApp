@@ -18,6 +18,7 @@ import ImageFiled from 'Base/ImageFiled';
 import Timer from 'Base/Timer';
 import { ResultRight as setRightAction } from '../redux/modules/ImgResult';
 import SubmitButton from 'Base/SubmitButton';
+import ResultMsg from 'Base/Result';
 const styles = StyleSheet.create({
   field: {
     flex: 1,
@@ -84,29 +85,32 @@ class MainPage extends Component {
 		console.log(imageList);
 		if( imageList.length > 0 ){
 			return (
-				<View style={{ flex: 1 }}>
+
+			<Image  style={{ flex: 1, width: undefined, height: undefined ,resizeMode: 'stretch' }} source={require('../res/mainImg2.jpg')} >
 					<Timer sec={30} />
-					<View style={{justifyContent: 'center', alignItems: 'center', flex: 2 }}>
-						<View style={{justifyContent: 'center', alignItems: 'center', flex: 3,flexDirection:'column' }}>
-							<Text style={{textAlign : 'right', fontSize :15, fontWeight :'bold'}}>类别</Text>
+					<View style={{justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+						<View style={{justifyContent: 'center', alignItems: 'center', flex: 1,flexDirection:'column' }}>
+							<Text style={{textAlign : 'right', fontSize :15, fontWeight :'bold'}}>ClassName</Text>
 							<ImageFiled 
 							imgURL={`http://172.18.32.202:8000/image/${imageList[ind]}`}
 							id={0} 
-							size={{width:250,height:300}}
+							size={{width:250,height:250}}
 							/>
 
 						</View>
-						<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection:'row',  flexWrap: 'wrap' }}>
-						{ (!this.props.PressId.ispressed) && 
+						<View style={{ flex: 0.7, justifyContent: 'center', alignItems: 'center', flexDirection:'row',  flexWrap: 'wrap' }}>
+						{ (!this.props.PressId.ispressed &&  !this.props.Result.Result ) && 
 							ButtonList.map((item)=>(
 								<TinyButton key={item}  imgList={this.state.imageList} innerText={item}/>
 								))}
+							<ResultMsg/>
 						</View>
 
 						<SubmitButton/>
 
 					</View>
-				</View>
+				
+				</Image>
 			)
 		}else{
 			return (
@@ -121,6 +125,7 @@ export default  connect(
 	(state,props) => ({
     ind: state.ind.ind,
     PressId: state.PicAction,
-    imageList:state.imgList
+    imageList:state.imgList,
+    Result:state.ImgResult
   }),{setRight:setRightAction}
 	)(MainPage)

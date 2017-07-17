@@ -1,11 +1,14 @@
 export const PICPRESS = 'PICPRESS';
 export const PICRELEASE = 'PICRELEASE';
-export const GAMESTART = 'GAMESTART'
+export const GAMESTART = 'GAMESTART';
+export const RightType = 'Right';
 export default (state = {}, action = {})=>{
 	switch(action.type){
 		case PICPRESS:
 			return action.payload;
 		case PICRELEASE:
+			return action.payload;
+		case RightType:
 			return action.payload;
 		default:
 			return state;
@@ -26,5 +29,11 @@ export const PicRelease = ()=>{
 export const GameStart = ()=>{
 	return{
 		type:GAMESTART
+	}
+}
+export const Right = ()=>{
+	return {
+		type:RightType,
+		payload:{msg:'Cat'},
 	}
 }

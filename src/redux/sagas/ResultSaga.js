@@ -10,13 +10,14 @@ const wait = ms => (
 )
 const sagas = function* (){
 	function* handle(action){
+
 		while(true){
 			const rel = yield race({
 		        stopped: take('STOP'),
 		        tick: call(wait, 1000)
 			})
 			if(!rel.stopped){
-				yield put(nextImage(4));
+				yield put(nextImage(1));
 				yield put(UnSetResult());
 				yield put(resetTimer(10000));
 				break;

@@ -37,8 +37,7 @@ class ImageFiled extends Component{
 					}}
 					>
 						<Image source={{uri:imgURL}} 
-						style={ PressId.ispressed ? (PressId.picid === imgURL ? this.state.size : {width:0, height:0}) :
-								this.state.size}
+						style={ PressId.ispressed ?  this.state.size : this.state.size}
 						 />
 						
 					</TouchableHighlight>
@@ -57,8 +56,7 @@ class ImageFiled extends Component{
 					}}
 					>
 						<Image source={{uri:imgURL}} 
-						style={ PressId.ispressed ? (PressId.picid === imgURL ? this.state.size : {width:0, height:0}) :
-								this.state.size}
+						style={ PressId.ispressed ?  this.state.size : this.state.size}
 						 />
 						
 					</TouchableHighlight>
@@ -76,8 +74,7 @@ class ImageFiled extends Component{
 				}}
 				>
 					<Image source={{uri:imgURL}} 
-					style={ PressId.ispressed ? (PressId.picid === imgURL ? this.state.size : {width:0, height:0}) :
-							this.state.size}
+					style={ PressId.ispressed ?  this.state.size : this.state.size}
 					 />
 					
 				</TouchableHighlight>

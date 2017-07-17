@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableHighlight,
   TouchableWithoutFeedback,
+  Image
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -68,12 +69,13 @@ class HomePage extends Component {
     const { gameStart } = this.props;
     return (
     	<View style={{ flex: 1 }}>
-	      <View style={{ justifyContent: 'center', alignItems: 'center',
-	              flex: 26, backgroundColor: 'rgb(255,255,255)' }}>
-	        <Text style={{ fontSize: 30,fontWeight: 'bold', }} >Quick Describe</Text>
-	        
-	      </View>
-	      
+        <View style={{ justifyContent: 'center', alignItems: 'center',
+                flex: 0.2, backgroundColor: 'rgb(255,255,255)',marginBottom:20 }}>
+          <Text style={{ fontSize: 40,fontWeight: 'bold',color:'cornflowerblue' }} >Quick Describe</Text>
+          
+        </View>
+        <Image  style={{ flex: 1, width: undefined, height: undefined ,resizeMode: 'stretch',marginBottom:20 }} source={require('../res/startImg.png')} >
+	      </Image>
 
         <ColoredRaisedButton onPress={()=>{ Actions.MainPage(); gameStart();}} />
 		</View>

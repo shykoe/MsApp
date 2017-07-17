@@ -14,9 +14,9 @@ import {
   setTheme,
   MKButton,
 } from 'react-native-material-kit';
-
+import { PicPress as PicPressAction , PicRelease as PicReleaseAction } from '../redux/modules/Actions'
 import { SetResult as setRightAction } from '../redux/modules/ImgResult';
-
+import { Right as RightAction } from '../redux/modules/Actions' 
 const ColoredRaisedButton = MKButton.coloredButton()
   .withText('Submit')
   .build();
@@ -52,9 +52,12 @@ class SubmitButton extends Component{
 	render(){
 		const { setRight } = this.props;
 		return (
-		<ColoredRaisedButton style={styles.confirm1} />
+		<ColoredRaisedButton  
+		onPress={()=>{this.props.setRight(); this.props.Right()}}
+		style={styles.confirm1} 
+		/>
 		)
 	}
 }
 export default connect(null,
-			{setRight:setRightAction})(SubmitButton);
+			{setRight:setRightAction,Right:RightAction})(SubmitButton);
