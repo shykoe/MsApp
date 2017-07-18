@@ -77,7 +77,7 @@ class HomePage extends Component {
         <Image  style={{ flex: 1, width: undefined, height: undefined ,resizeMode: 'stretch',marginBottom:20 }} source={require('../res/startImg.png')} >
 	      </Image>
 
-        <ColoredRaisedButton onPress={()=>{ Actions.MainPage(); gameStart();}} />
+        <ColoredRaisedButton onPress={()=>{ Actions.Navigator(); gameStart();}} />
 		</View>
     )
   }

@@ -13,6 +13,7 @@
 		"react-native-material-kit": "^0.4.1",
 		"react-native-popup-menu": "^0.8.0",
 		"react-native-router-flux": "^3.35.0",
+		"react-native-tab-navigator": "^0.3.3",
 		"react-redux": "^5.0.5",
 		"redux": "^3.7.2",
 		"redux-logger": "3.0.1",
