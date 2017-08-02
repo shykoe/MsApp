@@ -1,8 +1,9 @@
 export const TAP_OPTION_PRESSED = 'TAP_OPTION_PRESSED';
-const LearnTab = 'Learn';
-
+const learnTab = 'Learn';
+const gameTab = 'Game';
+const setTab = 'Set';
 const initialState = {
-  pressedOption: LearnTab
+  pressedOption: gameTab
 };
 
 export default function reducer(state = initialState, action = {}) {

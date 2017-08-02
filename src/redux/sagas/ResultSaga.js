@@ -9,7 +9,7 @@ const wait = ms => (
   })
 )
 const sagas = function* (){
-	function* handle(action){
+	function* handle1(action){
 
 		while(true){
 			const rel = yield race({
@@ -25,7 +25,7 @@ const sagas = function* (){
 		}
 	}
 	yield [
-        takeEvery(RSULTIMG, handle),        
+        takeEvery(RSULTIMG, handle1),        
     ];
 }
 export default sagas

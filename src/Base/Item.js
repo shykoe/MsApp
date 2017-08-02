@@ -6,7 +6,8 @@ import {
   TouchableHighlight
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-
+import { connect } from 'react-redux';
+import { GameStart as GameStartAction } from '../redux/modules/Actions';
 const styles = StyleSheet.create({
   row: {
     height: 100,
@@ -34,14 +35,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class ListItem extends Component {
+class ListItem extends Component {
 
   _handleClick = () => {
-    const { url, postHash, loadPost } = this.props;
+    const { gameStart } = this.props;
+    Actions.MainPage();
+    gameStart(this.props.title);
   };
 
   render() {
-    const { title, url, clicks, date } = this.props;
+    const { title } = this.props;
     return (
       <View>
         <TouchableHighlight onPress={this._handleClick} underlayColor={'transparent'}>
@@ -57,15 +60,7 @@ export default class ListItem extends Component {
             </View>
             <View style={styles.innerRow}>
               <View style={{ flex: 0.5 }}/>
-              <View style={{ flex: 2.5, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                <Text style={styles.rowText}>
-                  点击数: { clicks }
-                </Text>
-              </View>
               <View style={{ flex: 4 }}>
-                <Text style={[styles.rowText, { textAlign: 'right' }]}>
-                  { date }
-                </Text>
               </View>
               <View style={{ flex: 0.5 }}/>
             </View>
@@ -76,3 +71,4 @@ export default class ListItem extends Component {
     );
   }
 }
+export default connect(null,{gameStart:GameStartAction})(ListItem);

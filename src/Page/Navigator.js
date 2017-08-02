@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { View, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import TabNavigator from 'react-native-tab-navigator';
-import LearnPageList from 'Page/LearnPage';
+import LearnPageList from 'Page/LearnList';
+import GamePageList from 'Page/GameList';
 import { tapOptionPressed } from '../redux/modules/tapOption';
 const learnTab = 'Learn';
 const gameTab = 'Game';
@@ -14,14 +15,37 @@ const titleDict = {
   setTab: '设置'
 };
 class TapNavigator extends Component {
-  static propTypes = {
-    pressedOption: PropTypes.string,
-  };
+	constructor(prop) {
+		super(prop);
+		this.state = {
+		};
+	}
+
+  	componentDidMount(){
+  		fetch("http://172.18.32.202:8000/api/classname").
+  		then(response => response.json()).then(data=>this.setState({game:data.game,learn:data.learn}));
+  	}
 	render(){
 		const {  certainTapOptionPressed, pressedOption } = this.props;
+		const { game, learn } = this.state;
+		console.log(this.state);
+		// const game = this.state.game ? this.state.game : [];
+		// const learn = this.state.learn ? this.state.learn : [];
 		return(
 			<View style={{ flex: 1 }}>
 				<TabNavigator>
+		          <TabNavigator.Item
+		            title="游戏"
+		            titleStyle={{ marginTop: 0 }}
+		            selectedTitleStyle={{ color: '#fc343b' }}
+		            renderIcon={() => <Image source={require('../res/game.png')} />}
+		            renderSelectedIcon={() =>  <Image source={require('../res/game.png')} />}
+		    		selected={pressedOption === gameTab}
+		    		onPress={() => certainTapOptionPressed(gameTab)}
+		            >
+		           <GamePageList data={game} />
+		          </TabNavigator.Item>
+
 		          <TabNavigator.Item
 		            title="学习"
 		            titleStyle={{ marginTop: 0 }}
@@ -33,19 +57,6 @@ class TapNavigator extends Component {
 		            >
 		           <LearnPageList/>
 		          </TabNavigator.Item>
-
-		          <TabNavigator.Item
-		            title="游戏"
-		            titleStyle={{ marginTop: 0 }}
-		            selectedTitleStyle={{ color: '#fc343b' }}
-		            renderIcon={() => <Image source={require('../res/game.png')} />}
-		            renderSelectedIcon={() =>  <Image source={require('../res/game.png')} />}
-		    		selected={pressedOption === gameTab}
-		    		onPress={() => certainTapOptionPressed(gameTab)}
-		            >
-		           <LearnPageList/>
-		          </TabNavigator.Item>
-
 		          <TabNavigator.Item
 		            title="设置"
 		            titleStyle={{ marginTop: 0 }}

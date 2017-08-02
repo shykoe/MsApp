@@ -26,9 +26,10 @@ export const PicRelease = ()=>{
 		payload:{ispressed:false}
 	}	
 }
-export const GameStart = ()=>{
+export const GameStart = (className)=>{
 	return{
-		type:GAMESTART
+		type:GAMESTART,
+		payload:className
 	}
 }
 export const Right = ()=>{

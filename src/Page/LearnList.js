@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   }
 });
 const data=[
-	{key:'123',title: 'a',url:'http://www.material-ui.com/#/components/grid-list',clicks:123,},
+	{key:'123',title: 'aaaa',url:'http://www.material-ui.com/#/components/grid-list',clicks:123,},
 	{key:'1231',title: 'a',url:'http://www.material-ui.com/#/components/grid-list',clicks:123,},
  ]
 class LearnPageList extends Component {
