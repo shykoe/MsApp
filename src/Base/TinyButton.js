@@ -107,7 +107,6 @@ class TinyButton extends Component{
       innerText, 
       nextImage,
       setRight,
-      imgList
       } = this.props;
 		return (
       <View style={{display:'flex',height:80}} >
@@ -119,6 +118,7 @@ class TinyButton extends Component{
           max={100}
           minValue={0}
           maxValue={100}
+          value={20}
           onChange={(curValue) => this.refs.valueText.onChange(curValue.toFixed(2)/100.0)}
           />}
         {this.state.submitButtonPressed &&<ValueText ref="valueText"  initial="0" style={{margin: 0}} />}

@@ -6,7 +6,7 @@ import { TIMEREND,resetTimer } from '../modules/Timer';
 const sagas = function* (){
 	function* handle(action){
 		yield put(nextImage(1));
-		yield put(resetTimer(10000));
+		yield put(resetTimer(30000));
 	}
 	yield [
         takeEvery(TIMEREND, handle),        

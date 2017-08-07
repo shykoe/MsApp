@@ -11,7 +11,8 @@ import { Actions } from 'react-native-router-flux';
 import {
   MKProgress,
   MKSpinner,
-  MKButton
+  MKButton,
+  MKColor
 } from 'react-native-material-kit';
 import TinyButton from 'Base/TinyButton';
 import ImageFiled from 'Base/ImageFiled';
@@ -19,6 +20,10 @@ import Timer from 'Base/Timer';
 import { ResultRight as setRightAction } from '../redux/modules/ImgResult';
 import SubmitButton from 'Base/SubmitButton';
 import ResultMsg from 'Base/Result';
+import DrawComponent from 'Base/DrawComponent';
+import Panel from 'Base/Panel';
+const RaisedButton = MKButton.coloredButton()
+  .build();
 const styles = StyleSheet.create({
   field: {
     flex: 1,
@@ -76,56 +81,46 @@ class MainPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			clear:1
 		}
 
 	}
 	render() {
 		const ButtonList = ['Mouth', 'Hair', 'Sail', 'Metal', 'Feather', 'Wool']
-		const { ind, setRight, imageList } = this.props;
-		console.log(imageList);
-		if( imageList.length > 0 ){
-			return (
+		const  { className, ind }  = this.props;
+		console.log(ind);
+		return (
 
-			<Image  style={{ flex: 1, width: undefined, height: undefined ,resizeMode: 'stretch' }} source={require('../res/mainImg2.jpg')} >
-					<Timer sec={30} />
-					<View style={{justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-						<View style={{justifyContent: 'center', alignItems: 'center', flex: 1,flexDirection:'column' }}>
-							<Text style={{textAlign : 'right', fontSize :15, fontWeight :'bold'}}>ClassName</Text>
-							<ImageFiled 
-							imgURL={`http://172.18.32.202:8000/image/${imageList[ind]}`}
-							id={0} 
-							size={{width:250,height:250}}
-							/>
-
-						</View>
-						<View style={{ flex: 0.7, justifyContent: 'center', alignItems: 'center', flexDirection:'row',  flexWrap: 'wrap' }}>
-						{ (!this.props.PressId.ispressed &&  !this.props.Result.Result ) && 
-							ButtonList.map((item)=>(
-								<TinyButton key={item}  imgList={this.state.imageList} innerText={item}/>
-								))}
-							<ResultMsg/>
-						</View>
-
-						<SubmitButton/>
-
+		<Image  style={{ flex: 1, width: undefined, height: undefined ,resizeMode: 'stretch' }} source={require('../res/mainImg2.jpg')} >
+				<Timer sec={30} />
+				<View style={{justifyContent: 'center', alignItems: 'center', flex: 1,marginTop:10 }}>
+					<View style={{justifyContent: 'center', alignItems: 'center', flex: 1,flexDirection:'column' }}>
+						<Text style={{textAlign : 'right', fontSize :25, fontWeight :'bold'}}>{className[ind]}</Text>
+						      <View style={{width:310, height:310}}>
+						        <DrawComponent clear={this.state.clear}/>
+						      </View>
+						      <RaisedButton
+						      style={{width: 40,height: 40,margin:4,marginBottom:20,justifyContent: 'center',alignItems: 'center',borderRadius: 10, alignSelf:'flex-end'}}
+						      backgroundColor={MKColor.Silver}
+						      onPress={()=>(this.setState( (preState)=>( { clear: preState.clear + 1 } ) ))}
+						      >
+						      <Text>clear</Text>
+						      </RaisedButton>
 					</View>
-				
-				</Image>
-			)
-		}else{
-			return (
-				<View style={{justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-					<SingleColorSpinner/>
+
+					<Panel className={className}/>
+					<SubmitButton/>
+
 				</View>
-				)
-		}
+			
+			</Image>
+		)
+
 	}
 }
 export default  connect(
 	(state,props) => ({
-    ind: state.ind.ind,
-    PressId: state.PicAction,
-    imageList:state.imgList,
-    Result:state.ImgResult
-  }),{setRight:setRightAction}
-	)(MainPage)
+    ind:state.ind,
+    className:state.imgList
+  }),null
+  	)(MainPage)

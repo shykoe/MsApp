@@ -28,7 +28,6 @@ class TapNavigator extends Component {
 	render(){
 		const {  certainTapOptionPressed, pressedOption } = this.props;
 		const { game, learn } = this.state;
-		console.log(this.state);
 		// const game = this.state.game ? this.state.game : [];
 		// const learn = this.state.learn ? this.state.learn : [];
 		return(

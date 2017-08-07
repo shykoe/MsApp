@@ -9,7 +9,7 @@ const scenes = Actions.create(
         <Scene key="HomePage" component={HomePage}  initial={true} hideNavBar={true} />
         <Scene key="Navigator" component={TapNavigator}  />
         <Scene key="ScorePage" component={ScorePage} title="Score" />
-        <Scene key="MainPage" component={MainPage} hideNavBar={true}/>
+        <Scene key="MainPage" component={MainPage} panHandlers={null} hideNavBar={true}/>
     </Scene>
 );
 

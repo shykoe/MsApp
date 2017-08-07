@@ -2,7 +2,7 @@ export const SETTIMER = 'SETTIMER';
 export const RESETTIMER = 'RESETTIMER';
 export const TIMERTICK = 'TIMERTICK';
 export const TIMEREND = 'TIMEREND';
-export default (previousState = 5000, action = {})=>{
+export default (previousState = 30000, action = {})=>{
 	switch(action.type){
 		case SETTIMER:
 			return action.payload;
