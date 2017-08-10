@@ -16,6 +16,7 @@ import {
   MKButton,
 } from 'react-native-material-kit';
 import { ResultRight as setRightAction } from '../redux/modules/ImgResult';
+import { changeAttrs } from '../redux/modules/Attrs';
 const ColoredRaisedButton = MKButton.coloredButton()
   .build();
 const styles = StyleSheet.create({
@@ -83,57 +84,75 @@ class ValueText extends Component {
   }
 
   render() {
+    const { attrValue } = this.props;
     return (
       <View style={{marginBottom:2,justifyContent: 'center',alignItems: 'center'}}>
       <Text>
-        {this.state.curValue}
+        {attrValue}
       </Text>
       </View>
     );
   }
 }
 
-
 class TinyButton extends Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-		  	submitButtonPressed:false
+		  	ButtonPressed:false
 		}
 	}
+  componentWillMount(){
+    const { value } = this.props;
+    if(value>0){
+      this.setState({ButtonPressed:true})
+    }
+  }
+  handlePress = ()=>{
+    const { ButtonPressed } = this.state;
+    const { innerText } = this.props;
+    if(ButtonPressed){
+      this.props.dispatch(changeAttrs(innerText, 0));
+      this.setState({ButtonPressed:false});
+    }else{
+      this.setState({ButtonPressed:true});
+    }
+  }
 	render() {
-		var { 
-      handleSubmit,
-      innerText, 
-      nextImage,
+		const { 
+      innerText,
       setRight,
-      imgList
+      value,
+      chAttr
       } = this.props;
 		return (
-      <View style={{display:'flex',height:80}} >
+      <View style={{display:'flex',height:90}} >
         <View style={{marginTop: 0,height:40, marginBottom:5}}>
-        {this.state.submitButtonPressed &&
+        {this.state.ButtonPressed &&
           <MKSlider 
           style={{margin: 0}}
           min={0}
           max={100}
           minValue={0}
           maxValue={100}
+          value={value*100}
           onChange={(curValue) => this.refs.valueText.onChange(curValue.toFixed(2)/100.0)}
+          onConfirm={(curValue)=> this.props.dispatch( changeAttrs(innerText,curValue.toFixed(2)/100.0 ))}
           />}
-        {this.state.submitButtonPressed &&<ValueText ref="valueText"  initial="0" style={{margin: 0}} />}
+        {this.state.ButtonPressed &&<ValueText ref="valueText" attrValue={value}  attrName={innerText} initial="0" style={{margin: 0}} />}
         </View>
         <ColoredRaisedButton 
-        style={{width: 100,height: 40,margin:4,justifyContent: 'center',alignItems: 'center',borderRadius: 10}}
-        backgroundColor={this.state.submitButtonPressed ? MKColor.Amber : MKColor.Silver }
-        onPress={()=>(this.setState( (preState)=>( { submitButtonPressed: !preState.submitButtonPressed } )))}
+        style={{width: 90,height: 40,margin:4,justifyContent: 'center',alignItems: 'center',borderRadius: 10}}
+        backgroundColor={this.state.ButtonPressed ? MKColor.Amber : MKColor.Silver }
+        onPress={ this.handlePress }
         >
-        <Text>{innerText}</Text>
+        <Text style={{fontSize :15, fontWeight :'bold'}}>{innerText}</Text>
         </ColoredRaisedButton>
       </View>
 			)
 	}
 }
-export default connect(null,{
-  nextImage:nextImage,
-})(TinyButton)
+export default connect(
+  (state,props)=>({
+    value:state.attrs[props.innerText]
+  }),null)(TinyButton)

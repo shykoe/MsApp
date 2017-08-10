@@ -17,8 +17,10 @@ import TinyButton from 'Base/TinyButton';
 import ImageFiled from 'Base/ImageFiled';
 import Timer from 'Base/Timer';
 import { ResultRight as setRightAction } from '../redux/modules/ImgResult';
+import { fetchAttrs as fetchAttrsAction } from '../redux/modules/Attrs';
 import SubmitButton from 'Base/SubmitButton';
 import ResultMsg from 'Base/Result';
+import Panel from 'Base/Panel';
 const styles = StyleSheet.create({
   field: {
     flex: 1,
@@ -79,10 +81,11 @@ class MainPage extends Component {
 		}
 
 	}
+
 	render() {
 		const ButtonList = ['Mouth', 'Hair', 'Sail', 'Metal', 'Feather', 'Wool']
 		const { ind, setRight, imageList } = this.props;
-		console.log(imageList);
+		
 		if( imageList.length > 0 ){
 			return (
 
@@ -90,7 +93,7 @@ class MainPage extends Component {
 					<Timer sec={30} />
 					<View style={{justifyContent: 'center', alignItems: 'center', flex: 1 }}>
 						<View style={{justifyContent: 'center', alignItems: 'center', flex: 1,flexDirection:'column' }}>
-							<Text style={{textAlign : 'right', fontSize :15, fontWeight :'bold'}}>ClassName</Text>
+							<Text style={{textAlign : 'right', fontSize :25, fontWeight :'bold'}}>{imageList[ind] && imageList[ind].split('_')[0]}</Text>
 							<ImageFiled 
 							imgURL={`http://172.18.32.202:8000/image/${imageList[ind]}`}
 							id={0} 
@@ -98,14 +101,8 @@ class MainPage extends Component {
 							/>
 
 						</View>
-						<View style={{ flex: 0.7, justifyContent: 'center', alignItems: 'center', flexDirection:'row',  flexWrap: 'wrap' }}>
-						{ (!this.props.PressId.ispressed &&  !this.props.Result.Result ) && 
-							ButtonList.map((item)=>(
-								<TinyButton key={item}  imgList={this.state.imageList} innerText={item}/>
-								))}
-							<ResultMsg/>
-						</View>
 
+						<Panel/>
 						<SubmitButton/>
 
 					</View>
@@ -113,11 +110,7 @@ class MainPage extends Component {
 				</Image>
 			)
 		}else{
-			return (
-				<View style={{justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-					<SingleColorSpinner/>
-				</View>
-				)
+			return null;
 		}
 	}
 }
@@ -127,5 +120,5 @@ export default  connect(
     PressId: state.PicAction,
     imageList:state.imgList,
     Result:state.ImgResult
-  }),{setRight:setRightAction}
+  }),{setRight:setRightAction,fetchAttrs:fetchAttrsAction}
 	)(MainPage)

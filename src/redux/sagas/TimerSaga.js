@@ -5,8 +5,12 @@ import { nextImage } from '../modules/ind';
 import { TIMEREND,resetTimer } from '../modules/Timer';
 const sagas = function* (){
 	function* handle(action){
+		const state = yield select();
+		if(state.ind.ind >= state.imgList.length - 1 ){
+			return;
+		}
+		yield put(resetTimer(30000));
 		yield put(nextImage(1));
-		yield put(resetTimer(10000));
 	}
 	yield [
         takeEvery(TIMEREND, handle),        

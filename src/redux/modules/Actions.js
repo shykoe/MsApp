@@ -1,14 +1,15 @@
 export const PICPRESS = 'PICPRESS';
 export const PICRELEASE = 'PICRELEASE';
 export const GAMESTART = 'GAMESTART';
-export const RightType = 'Right';
+export const MSGPOST = 'MSGPOST';
+export const SUBMIT = 'SUBMIT';
 export default (state = {}, action = {})=>{
 	switch(action.type){
 		case PICPRESS:
 			return action.payload;
 		case PICRELEASE:
 			return action.payload;
-		case RightType:
+		case MSGPOST:
 			return action.payload;
 		default:
 			return state;
@@ -32,9 +33,14 @@ export const GameStart = (className)=>{
 		payload:className
 	}
 }
-export const Right = ()=>{
+export const MsgPost = (payload)=>{
 	return {
 		type:RightType,
-		payload:{msg:'Cat'},
+		payload:{msg:payload},
+	}
+}
+export const Submit = ()=>{
+	return {
+		type:SUBMIT
 	}
 }

@@ -10,6 +10,9 @@ import { timerTick as timerTickAction, timerEnd as timerEndAction } from '../red
 class Timer extends Component{
 	constructor(props) {
 		super(props);
+		this.state={
+			timeEnd:false
+		}
 	}
 	componentDidMount() {
 		const { timerTick } = this.props;
@@ -24,11 +27,15 @@ class Timer extends Component{
     	this.timerChange && clearTimeout(this.timerChange);
   	}
   	componentDidUpdate(prevProps, prevState){
-  		const { sec, timerEnd } = prevProps;
-  		if(sec <= 1000){
+  		const { sec, timerEnd } = this.props;
+
+  		if(sec < 1000 ){
 			timerEnd();
   		}
   	}
+  	// componentWillReceiveProps(nextProps){
+
+  	// }
 	render(){
 		const { sec, timerEnd } = this.props;
 		return (

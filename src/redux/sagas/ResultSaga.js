@@ -17,9 +17,13 @@ const sagas = function* (){
 		        tick: call(wait, 1000)
 			})
 			if(!rel.stopped){
+				const state = yield select();
+				if(state.ind.ind >= state.imgList.length-1 ){
+					return;
+				}
 				yield put(nextImage(1));
 				yield put(UnSetResult());
-				yield put(resetTimer(10000));
+				yield put(resetTimer(30000));
 				break;
 			}
 		}
