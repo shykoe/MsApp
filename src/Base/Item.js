@@ -14,17 +14,21 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: 20,
-    paddingBottom: 7,
+    paddingTop: 40  ,
+    paddingBottom: 0,
     backgroundColor: '#ffffff'
   },
   innerRow: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   titleText: {
     fontSize: 18,
+    fontWeight :'bold',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf:'center'
   },
   rowText: {
     fontSize: 16,
@@ -39,8 +43,9 @@ class ListItem extends Component {
 
   _handleClick = () => {
     const { gameStart } = this.props;
-    Actions.MainPage();
     gameStart(this.props.title);
+    Actions.MainPage();
+    
   };
 
   render() {
@@ -56,14 +61,9 @@ class ListItem extends Component {
                   { title }
                 </Text>
               </View>
-              <View style={{ flex: 0.5 }}/>
+             
             </View>
-            <View style={styles.innerRow}>
-              <View style={{ flex: 0.5 }}/>
-              <View style={{ flex: 4 }}>
-              </View>
-              <View style={{ flex: 0.5 }}/>
-            </View>
+
           </View>
         </TouchableHighlight>
         <View style={styles.separator} />

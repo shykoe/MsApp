@@ -89,11 +89,11 @@ class MainPage extends Component {
 		if( imageList.length > 0 ){
 			return (
 
-			<Image  style={{ flex: 1, width: undefined, height: undefined ,resizeMode: 'stretch' }} source={require('../res/mainImg2.jpg')} >
+			<Image  style={{ flex: 1, width: undefined, height: undefined ,resizeMode: 'cover' }} source={require('../res/mainImg2.jpg')} >
 					<Timer sec={30} />
 					<View style={{justifyContent: 'center', alignItems: 'center', flex: 1 }}>
 						<View style={{justifyContent: 'center', alignItems: 'center', flex: 1,flexDirection:'column' }}>
-							<Text style={{textAlign : 'right', fontSize :25, fontWeight :'bold'}}>{imageList[ind] && imageList[ind].split('_')[0]}</Text>
+							<Text style={{textAlign : 'right', fontSize :25, fontWeight :'bold'}}>{imageList[ind] && imageList[ind].split('_')[0] + '(' + (ind + 1) +'/'+ imageList.length+ ')'}</Text>
 							<ImageFiled 
 							imgURL={`http://172.18.32.202:8000/image/${imageList[ind]}`}
 							id={0} 
@@ -102,11 +102,11 @@ class MainPage extends Component {
 
 						</View>
 
-						<Panel/>
-						<SubmitButton/>
+						<Panel className={imageList[ind].split('_')[0]} />
+						
 
 					</View>
-				
+				<SubmitButton/>
 				</Image>
 			)
 		}else{

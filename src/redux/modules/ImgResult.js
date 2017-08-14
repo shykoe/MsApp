@@ -1,6 +1,6 @@
 export const RSULTIMG = 'RSULTIMG';
 export const UNSETRESULT = 'UNSETRESULT';
-export default (state = {Result:false}, action = {})=>{
+export default (state = {Result:false,isRight:false}, action = {})=>{
 	switch(action.type){
 		case RSULTIMG:
 			return action.payload;
@@ -10,15 +10,15 @@ export default (state = {Result:false}, action = {})=>{
 			return state;
 	}
 }
-export const SetResult = (Picid)=>{
+export const SetResult = (result)=>{
 	return{
 		type: RSULTIMG,
-		payload:{Result:true,picid:Picid},
+		payload:{Result:true,isRight:result},
 	}	
 }
 export const UnSetResult = ()=>{
 	return{
 		type: UNSETRESULT,
-		payload:{Result:false,picid:null},
+		payload:{Result:false,isRight:false},
 	}	
 }

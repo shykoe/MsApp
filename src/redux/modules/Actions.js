@@ -33,10 +33,11 @@ export const GameStart = (className)=>{
 		payload:className
 	}
 }
-export const MsgPost = (payload)=>{
+export const MsgPost = (payload,score=10)=>{
 	return {
-		type:RightType,
-		payload:{msg:payload},
+		type:MSGPOST,
+		payload:{msg:payload,score:score},
+
 	}
 }
 export const Submit = ()=>{

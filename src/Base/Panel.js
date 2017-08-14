@@ -51,7 +51,7 @@ class Panel extends Component{
 		this.setState({ind:0});
 	}
 	render(){
-		const { Attrs } = this.props;
+		const { Attrs, className } = this.props;
 		const { ind } = this.state;
 		if(isEmpty(Attrs) || ind === undefined){
 			return null;
@@ -61,7 +61,7 @@ class Panel extends Component{
 				{(!this.props.PressId.ispressed &&  !this.props.Result.Result ) && 
 
 					<TouchableHighlight
-					style={{marginTop:50, width: 50,height: 25,alignSelf:'center',justifyContent: 'center', alignItems: 'center'}}
+					style={{marginLeft:10,marginTop:50, width: 25,height: 25,alignSelf:'center',justifyContent: 'center', alignItems: 'center'}}
 					onPress={()=>(this.prePage())}
 					>
 					<Image
@@ -73,16 +73,16 @@ class Panel extends Component{
 					</TouchableHighlight>
 				}
 				
-				<View style={{  marginLeft:10,width: 400,flex: 0.7, justifyContent: 'flex-start', flexDirection:'row',  flexWrap: 'wrap' }} >
+				<View style={{  width: 400,flex: 0.7,justifyContent: 'center', flexDirection:'row',  flexWrap: 'wrap' }} >
 						{ (!this.props.PressId.ispressed &&  !this.props.Result.Result ) && 
-							Object.keys(Attrs).slice( ind,ind + 6).map((item)=>(<TinyButton key={item} innerText={item} />))
+							Object.keys(Attrs).slice( ind,ind + 6).map((item)=>(<TinyButton key={item} className={className} innerText={item} />))
 							}
 							<ResultMsg/>
 				</View>
 				
 				{(!this.props.PressId.ispressed &&  !this.props.Result.Result ) && 
 					<TouchableHighlight
-					style={{marginTop:50, width: 50,height: 25,alignSelf:'center',justifyContent: 'center', alignItems: 'center'}}
+					style={{marginRight:10,marginTop:50, width: 25,height: 25,alignSelf:'center',justifyContent: 'center', alignItems: 'center'}}
 					onPress={()=>(this.nextPage())}
 					>
 					<Image

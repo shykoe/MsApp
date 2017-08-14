@@ -3,7 +3,8 @@ import {
 	View, 
 	Text, 
 	Image,
-	TouchableHighlight 
+	TouchableHighlight,
+  Slider 
 } from 'react-native';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -103,19 +104,35 @@ class TinyButton extends Component{
 		}
 	}
   componentWillMount(){
-    const { value } = this.props;
-    if(value>0){
+    const { value, innerText } = this.props;
+    if(value>0.1){
       this.setState({ButtonPressed:true})
+    }else{
+      this.setState({ButtonPressed:false})
+    }
+  }
+  componentDidMount(){
+
+  }
+  componentWillReceiveProps( nextProps){
+    if(nextProps.value){
+      this.setState({ButtonPressed:true});
+
+    }else{
+    this.setState({ButtonPressed:false});
     }
   }
   handlePress = ()=>{
     const { ButtonPressed } = this.state;
     const { innerText } = this.props;
     if(ButtonPressed){
-      this.props.dispatch(changeAttrs(innerText, 0));
       this.setState({ButtonPressed:false});
+      this.props.dispatch(changeAttrs(innerText, 0));
+      
     }else{
       this.setState({ButtonPressed:true});
+      this.props.dispatch(changeAttrs(innerText, 0));
+      
     }
   }
 	render() {
@@ -142,11 +159,11 @@ class TinyButton extends Component{
         {this.state.ButtonPressed &&<ValueText ref="valueText" attrValue={value}  attrName={innerText} initial="0" style={{margin: 0}} />}
         </View>
         <ColoredRaisedButton 
-        style={{width: 90,height: 40,margin:4,justifyContent: 'center',alignItems: 'center',borderRadius: 10}}
+        style={{width: 80,height: 40,margin:4,justifyContent: 'center',alignItems: 'center',borderRadius: 10}}
         backgroundColor={this.state.ButtonPressed ? MKColor.Amber : MKColor.Silver }
         onPress={ this.handlePress }
         >
-        <Text style={{fontSize :15, fontWeight :'bold'}}>{innerText}</Text>
+        <Text style={{fontSize :14, fontWeight :'bold'}}>{innerText}</Text>
         </ColoredRaisedButton>
       </View>
 			)

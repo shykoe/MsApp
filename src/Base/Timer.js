@@ -41,7 +41,7 @@ class Timer extends Component{
 		return (
 			<View  animation="tada" >
 			<Text style={{textAlign : 'right', fontSize :15, fontWeight :'bold'}} >
-			{`Time Remaining: ${sec / 1000} s`}
+			{`Time: ${sec / 1000} s`}
 			</Text>
 			</View>
 			)

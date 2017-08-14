@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 	    borderRadius: 10
 	},
   confirm1: {
-    width: 100,
+    width: 600,
     height: 44,
     backgroundColor: '#FF3133',
     marginTop: 12,
@@ -49,15 +49,30 @@ class SubmitButton extends Component{
 	  	isSubmit:false,
 		}
 	}
+	handleSubmit = ()=>{
+		const { attrs } = this.props;
+		if(Object.keys(attrs).reduce((p,i)=>(p||attrs[i]!==0), false)){
+			console.log(Object.keys(attrs).reduce((p,i)=>(p||attrs[i]!==0), false))
+			this.props.Submit();
+		}
+	}
 	render(){
-		const { setRight } = this.props;
-		return (
-		<ColoredRaisedButton  
-		onPress={()=>this.props.Submit()}
-		style={styles.confirm1} 
-		/>
-		)
+		const { setRight, result } = this.props;
+		if(!result.Result){
+			return (
+			<ColoredRaisedButton  
+			onPress={this.handleSubmit}
+			
+			/>)
+		}else{
+			return (
+			<ColoredRaisedButton  
+			
+			
+			/>)
+		}
+		
 	}
 }
-export default connect(null,
-			{Submit:SubmitAction})(SubmitButton);
+export default connect(
+	(state,props)=>({attrs:state.attrs,result:state.ImgResult}), {Submit:SubmitAction})(SubmitButton);

@@ -26,28 +26,9 @@ class ImageFiled extends Component{
 	}
 	render(){
 		const { imgURL, PressId, Result, id } = this.props;
-		if(Result.Result && Result.picid === id){
+		if(Result.Result && Result.picid === id && Result.isRight) {
 			return (
 					<View  animation='tada' >
-					<TouchableHighlight 
-					onPressIn={()=>{ this.setState((prevState)=>( { imgSize:prevState.size, size:prevState.imgSize } )); this.props.PicPress(imgURL); } }
-					onPressOut={()=>{ this.setState( (prevState)=>( { imgSize:prevState.size, size:prevState.imgSize } ) ); this.props.PicRelease(); } }
-					style={{
-						margin: 5
-					}}
-					>
-						<Image source={{uri:imgURL}} 
-						style={ PressId.ispressed ?  this.state.size : this.state.size}
-						 />
-						
-					</TouchableHighlight>
-					</View>
-
-				)
-		}
-		else if(Result.Result && Result.picid !== id){
-			return (
-					<View  animation='bounceOut' >
 					<TouchableHighlight 
 					onPressIn={()=>{ this.setState((prevState)=>( { imgSize:prevState.size, size:prevState.imgSize } )); this.props.PicPress(imgURL); } }
 					onPressOut={()=>{ this.setState( (prevState)=>( { imgSize:prevState.size, size:prevState.imgSize } ) ); this.props.PicRelease(); } }
