@@ -6,6 +6,7 @@ import TabNavigator from 'react-native-tab-navigator';
 import LearnPageList from 'Page/LearnList';
 import GamePageList from 'Page/GameList';
 import { tapOptionPressed } from '../redux/modules/tapOption';
+import config from '../config';
 const learnTab = 'Learn';
 const gameTab = 'Game';
 const setTab = 'Set';
@@ -22,7 +23,7 @@ class TapNavigator extends Component {
 	}
 
   	componentDidMount(){
-  		fetch("http://172.18.32.202:8000/api/classname").
+  		fetch(`${config.serverAdress}/api/classname`).
   		then(response => response.json()).then(data=>this.setState({game:data.game,learn:data.learn}));
   	}
 	render(){

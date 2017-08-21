@@ -4,7 +4,8 @@ import {
 	View, 
 	Text, 
 	Image,
-	TouchableHighlight 
+	TouchableHighlight,
+  Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -21,6 +22,7 @@ import { fetchAttrs as fetchAttrsAction } from '../redux/modules/Attrs';
 import SubmitButton from 'Base/SubmitButton';
 import ResultMsg from 'Base/Result';
 import Panel from 'Base/Panel';
+import config from '../config';
 const styles = StyleSheet.create({
   field: {
     flex: 1,
@@ -95,15 +97,15 @@ class MainPage extends Component {
 						<View style={{justifyContent: 'center', alignItems: 'center', flex: 1,flexDirection:'column' }}>
 							<Text style={{textAlign : 'right', fontSize :25, fontWeight :'bold'}}>{imageList[ind] && imageList[ind].split('_')[0] + '(' + (ind + 1) +'/'+ imageList.length+ ')'}</Text>
 							<ImageFiled 
-							imgURL={`http://172.18.32.202:8000/image/${imageList[ind]}`}
+							imgURL={`${config.imageAdress}/image/${imageList[ind]}`}
 							id={0} 
 							size={{width:250,height:250}}
 							/>
 
 						</View>
-
+            <View style={{height:300,width:Dimensions.get('window').width}}>
 						<Panel className={imageList[ind].split('_')[0]} />
-						
+						</View>
 
 					</View>
 				<SubmitButton/>

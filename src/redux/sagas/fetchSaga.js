@@ -7,20 +7,21 @@ import { nextImage, ResetImage } from '../modules/ind';
 import { RSULTIMG, UnSetResult, SetResult } from '../modules/ImgResult';
 import { resetTimer } from '../modules/Timer';
 import { initAttrs } from '../modules/Attrs';
-import { scoreAdd, failureAdd, initCurrScore, scoreReset } from '../modules/score';	
+import { scoreAdd, failureAdd, initCurrScore, scoreReset } from '../modules/score';
+import config from '../../config';
 const getImgList = (className)=>(
-	fetch('http://172.18.32.202:8000/api/imglist?class='+className)
+	fetch(`${config.serverAdress}/api/imglist?class=${className}`)
 	.then((response)=>response.json()).then( data => data)
 	)
 const getAttrs = (className)=>(
-	fetch('http://172.18.32.202:8000/api/attrs?class=' + className)
+	fetch(`${config.serverAdress}/api/attrs?class=${className}`)
 	.then(response=>response.json()).then(data=>data)
 	)
 const postReq = (Url)=>(
 	fetch(Url).then(response=>response.json()).then(data=>data)
 	)
 const obj2Str = (obj, className)=>{
-	const url = 'http://172.18.32.202:8000/api/submit?';
+	const url = `${config.serverAdress}/api/submit?`;
 	var request = ['class='+className];
 	Object.keys(obj).map((item)=>request.push(item+'='+obj[item]));
 	const req = url + request.join("&");
