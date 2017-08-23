@@ -3,7 +3,8 @@ export const PICRELEASE = 'PICRELEASE';
 export const GAMESTART = 'GAMESTART';
 export const MSGPOST = 'MSGPOST';
 export const SUBMIT = 'SUBMIT';
-export default (state = {}, action = {})=>{
+export const SUBMITED = 'SUBMITED';
+export default (state = {isSubmit:false}, action = {})=>{
 	switch(action.type){
 		case PICPRESS:
 			return action.payload;
@@ -11,6 +12,10 @@ export default (state = {}, action = {})=>{
 			return action.payload;
 		case MSGPOST:
 			return action.payload;
+		case SUBMITED:
+			return {...state,isSubmit:false};
+		case SUBMIT:
+			return {...state,isSubmit:true};
 		default:
 			return state;
 	}

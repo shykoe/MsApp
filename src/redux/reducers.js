@@ -7,6 +7,7 @@ import ImgResultReducer from './modules/ImgResult';
 import Timer from './modules/Timer';
 import tapOptionReducer from './modules/tapOption';
 import AttrsReducer from './modules/Attrs';
+import AuthReducer from './modules/Auth';
 const combinedReducer = combineReducers({
   // Add reducers below
   ind:indReducer,
@@ -16,6 +17,7 @@ const combinedReducer = combineReducers({
   ImgResult:ImgResultReducer,
   Timer:Timer,
   tapOption: tapOptionReducer,
-  attrs:AttrsReducer
+  attrs:AttrsReducer,
+  user:AuthReducer
 });
 export default combinedReducer;

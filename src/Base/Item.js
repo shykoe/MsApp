@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import PopupDialog from 'react-native-popup-dialog';
 import { GameStart as GameStartAction } from '../redux/modules/Actions';
 const styles = StyleSheet.create({
   row: {

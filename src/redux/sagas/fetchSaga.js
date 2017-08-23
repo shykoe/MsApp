@@ -1,6 +1,6 @@
 import { takeEvery,delay } from 'redux-saga';
 import { call, put, select, race, take } from 'redux-saga/effects';
-import { GAMESTART, SUBMIT, MsgPost } from '../modules/Actions';
+import { GAMESTART, SUBMIT, MsgPost,SUBMITED } from '../modules/Actions';
 import { INDADD }  from '../modules/ind';
 import { setImgList } from '../modules/imgList';
 import { nextImage, ResetImage } from '../modules/ind';
@@ -70,7 +70,7 @@ const sagas = function* (){
 			yield put(MsgPost(result));
 			yield put(failureAdd())
 		}
-
+		yield put({type:SUBMITED})
 
 	}
 	yield [

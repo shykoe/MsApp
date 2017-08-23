@@ -94,7 +94,9 @@ class MainPage extends Component {
 			<Image  style={{ flex: 1, width: undefined, height: undefined ,resizeMode: 'cover' }} source={require('../res/mainImg2.jpg')} >
 					<Timer sec={30} />
 					<View style={{justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-						<View style={{justifyContent: 'center', alignItems: 'center', flex: 1,flexDirection:'column' }}>
+
+						<View style={{justifyContent: 'center', alignItems: 'center', flex: 1,flexDirection:'column', marginTop:15 }}>
+
 							<Text style={{textAlign : 'right', fontSize :25, fontWeight :'bold'}}>{imageList[ind] && imageList[ind].split('_')[0] + '(' + (ind + 1) +'/'+ imageList.length+ ')'}</Text>
 							<ImageFiled 
 							imgURL={`${config.imageAdress}/image/${imageList[ind]}`}
